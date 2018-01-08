@@ -108,3 +108,12 @@ var updatedUser = repository.Update(newUser);
 repository.UpdateRange(newUsers);
 ```
 
+##Dependencies
+
+This project was implemented on top of these dependencies:
+
+https://github.com/aspnet/EntityFramework6/wiki
+https://github.com/kahanu/System.Linq.Dynamic
+
+Many thanks!
+
