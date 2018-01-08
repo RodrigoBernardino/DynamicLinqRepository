@@ -18,7 +18,11 @@ Create a new class that will be used as your database repository. This class mos
 ```C#
 public class EntityRepository<TEntity> : EntityRepository<TEntity, YourDbContext>, IEntityRepository<TEntity>
         where TEntity : class, IIdentifiableEntity, new()
-    { }
+    {
+	public EntityRepository(bool lazyLoadingEnabled, bool proxyCreationEnabled)
+            : base(lazyLoadingEnabled, proxyCreationEnabled)
+        { }
+    }
 ```
 
 Create a new repository for **User** class. It will give you all the options to read and write to the users table that you have configured on your DbContext.
