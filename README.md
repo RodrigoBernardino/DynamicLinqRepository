@@ -14,7 +14,7 @@ public interface IEntityRepository<TEntity> : IEntityRepository<TEntity, YourDbC
         where TEntity : class, IIdentifiableEntity, new()
     { }
 ```
-Create a new class that will be used as your database repository. This class most inherit from the EntityRepository<TEntity, TContext> class and the IEntityRepository<TEntity> interface that you have just created.
+Create a new class that will be used as your database repository. This class most inherit from the EntityRepository<TEntity, TContext> class and also from the IEntityRepository<TEntity> interface that you have just created.
 ```C#
 public class EntityRepository<TEntity> : EntityRepository<TEntity, YourDbContext>, IEntityRepository<TEntity>
         where TEntity : class, IIdentifiableEntity, new()
@@ -32,7 +32,7 @@ public interface IEntityCounter<TEntity> : IEntityCounter<TEntity, YourDbContext
 { }
 ```
 	
-Create a new class that most inherit from EntityCounter<TEntity, YourDbContext> and the interface that you have just created.
+Create a new class that most inherit from EntityCounter<TEntity, YourDbContext> and also from the interface that you have just created.
 ```C#
 public class EntityCounter<TEntity> : EntityCounter<TEntity, RepositoryContext>, IEntityCounter<TEntity>
   where TEntity : class, IIdentifiableEntity, new()
