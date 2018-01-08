@@ -39,7 +39,7 @@ public class User : IIdentifiableEntity
 }	
 ```
 
-Create a new repository for **User** class. It will give you all the options to read and write to the users table that you have configured on your DbContext.
+Create a new repository for **User** class. It will give you all the options to read and write to the User's table that you have configured on your DbContext.
 ```C#
 var repository = new EntityRepository<User>(false, false)
 ```
