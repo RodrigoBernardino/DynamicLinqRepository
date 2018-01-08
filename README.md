@@ -1,6 +1,6 @@
 # DynamicLinqRepository
 
-Repository project that use Entity Framework and Dynamic Linq to provide useful methods for read and write entities with filtering, pagination and sorting.
+Repository project that use Entity Framework (>=6.2.0) and System.Linq.Dynamic (>=1.0.7) to provide useful methods for read and write entities with filtering, pagination and sorting.
 
 ## Instalation
 Get it on nuget: https://www.nuget.org/packages/DynamicLinqRepository/
@@ -8,7 +8,7 @@ Get it on nuget: https://www.nuget.org/packages/DynamicLinqRepository/
 	PM> Install-Package DynamicLinqRepository
 
 ## How to use
-Create a new interface that will configure your database repository. This interface most inherit from IEntityRepository<TEntity, TContext> interface, that depends of your DbContext. You can add any new methods here.
+Create a new interface that will configure your database repository. This interface most inherit from IEntityRepository<TEntity, TContext> interface, that depends of your Entity Framework DbContext. You can add any new methods here.
 ```C#
 public interface IEntityRepository<TEntity> : IEntityRepository<TEntity, YourDbContext>
         where TEntity : class, IIdentifiableEntity, new()
