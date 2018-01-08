@@ -38,18 +38,19 @@ Fetch all the data that matches the parameters of filtering, pagination and sort
 
 You can filter the data passing a string list that contains the dynamic linq clauses for that query.
 ```C#
-var clauses = new List<string>{ "Name.Contains(\"John\"", "Age > 20" };
+var clauses = new List<string>{ "Name.Contains(\"John\")", "Age > 20" };
 var users = repository.FindAll(clauses);
 ```
 
 You can paginate and sort your query results by the QueryLimits class.
 ```C#
-var queryLimits = new QueryLimits{
+var queryLimits = new QueryLimits
+{
   Limit = 5, //number of lines in one page
   Page = 2, //number of current page
   OrderBy = "Name", //name of the property that the results will be sorted
   Orientation = "ASC" //the sort orientation (can be ASC or DESC)
-}
+};
 
 var users = repository.FindAll(queryLimits, clauses);
 ```
