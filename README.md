@@ -59,11 +59,12 @@ var usersWithManager = repository.FindAllIncludingNestedProps(queryLimits, claus
 ### Write Methods
 
 All the returned entities are encapsulated in a **Maybe** class to avoid null reference errors.
+
 You can add a new entity with or without nested entity properties.
 ```C#
 var user = new User();
 var newUser = repository.Add(user); //without adding nested entity properties
-var newUser = repository.AddWithNestedProperties(user); //with adding nested entity properties
+var newUser = repository.AddWithNestedProperties(user); //adding nested entity properties
 if(newUser.Any()) {
   return newUser.Single();
 }
@@ -84,7 +85,7 @@ repository.RemoveRange(clauses);
 
 You can update an entity or a range of entities.
 ```C#
-var updatedUser = repository.Update(user);
-repository.UpdateRange(users);
+var updatedUser = repository.Update(newUser);
+repository.UpdateRange(newUsers);
 ```
 
