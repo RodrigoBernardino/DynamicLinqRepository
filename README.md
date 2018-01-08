@@ -8,13 +8,13 @@ Get it on nuget: https://www.nuget.org/packages/DynamicLinqRepository/
 	PM> Install-Package DynamicLinqRepository
 
 ## How to use
-Create a new interface that will configure your database repository. This interface most inherit from IEntityRepository<TEntity, TContext> interface, that depends of your Entity Framework DbContext. You can add any new methods here.
+Create a new interface that will configure your database repository. This interface must inherit from IEntityRepository<TEntity, TContext> interface, that depends of your Entity Framework DbContext. You can add any new methods here.
 ```C#
 public interface IEntityRepository<TEntity> : IEntityRepository<TEntity, YourDbContext>
         where TEntity : class, IIdentifiableEntity, new()
     { }
 ```
-Create a new class that will be used as your database repository. This class most inherit from the EntityRepository<TEntity, TContext> class and also from the IEntityRepository<TEntity> interface that you have just created.
+Create a new class that will be used as your database repository. This class must inherit from the EntityRepository<TEntity, TContext> class and also from the IEntityRepository<TEntity> interface that you have just created.
 ```C#
 public class EntityRepository<TEntity> : EntityRepository<TEntity, YourDbContext>, IEntityRepository<TEntity>
         where TEntity : class, IIdentifiableEntity, new()
@@ -32,7 +32,7 @@ public interface IEntityCounter<TEntity> : IEntityCounter<TEntity, YourDbContext
 { }
 ```
 	
-Create a new class that most inherit from EntityCounter<TEntity, YourDbContext> and also from the interface that you have just created.
+Create a new class that must inherit from EntityCounter<TEntity, YourDbContext> and also from the interface that you have just created.
 ```C#
 public class EntityCounter<TEntity> : EntityCounter<TEntity, RepositoryContext>, IEntityCounter<TEntity>
   where TEntity : class, IIdentifiableEntity, new()
@@ -43,7 +43,7 @@ public class EntityCounter<TEntity> : EntityCounter<TEntity, RepositoryContext>,
 }
 ```
 	
-All entity class most inherit from IIdentifiableEntity interface.
+All entity class must inherit from IIdentifiableEntity interface.
 ```C#
 public class User : IIdentifiableEntity
 {
