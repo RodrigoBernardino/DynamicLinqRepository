@@ -111,7 +111,8 @@ You can add a new entity with or without nested entity properties.
 var user = new User();
 var wrappedNewUser = repository.Add(user); //without adding nested entity properties
 var wrappedNewUser = repository.AddWithNestedProperties(user); //adding nested entity properties
-if(wrappedNewUser.Any()) {
+if(wrappedNewUser.Any()) 
+{
   return wrappedNewUser.Single();
 }
 ```
