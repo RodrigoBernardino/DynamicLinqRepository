@@ -109,17 +109,17 @@ All the returned entities are encapsulated in a **Maybe** class to avoid null re
 You can add a new entity with or without nested entity properties.
 ```C#
 var user = new User();
-var newUser = repository.Add(user); //without adding nested entity properties
-var newUser = repository.AddWithNestedProperties(user); //adding nested entity properties
-if(newUser.Any()) {
-  return newUser.Single();
+var wrappedNewUser = repository.Add(user); //without adding nested entity properties
+var wrappedNewUser = repository.AddWithNestedProperties(user); //adding nested entity properties
+if(wrappedNewUser.Any()) {
+  return wrappedNewUser.Single();
 }
 ```
 
 You can remove an entity passing the id or object.
 ```C#
-var removedUser = repository.Remove(1);
-var removedUser = repository.Remove(user);
+var wrappedRemovedUser = repository.Remove(1);
+var wrappedRemovedUser = repository.Remove(user);
 ```
 
 You can remove a range of entities passing the objects or passing the clauses.
@@ -131,7 +131,7 @@ repository.RemoveRange(clauses);
 
 You can update an entity or a range of entities.
 ```C#
-var updatedUser = repository.Update(newUser);
+var wrappedUpdatedUser = repository.Update(newUser);
 repository.UpdateRange(newUsers);
 ```
 
