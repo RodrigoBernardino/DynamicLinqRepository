@@ -24,6 +24,20 @@ public class EntityRepository<TEntity> : EntityRepository<TEntity, YourDbContext
         { }
     }
 ```
+All entity class most inherit from IIdentifiableEntity interface.
+```C#
+public class User : IIdentifiableEntity
+{
+  public int Id { get; set; }
+  public string Name { get; set; }
+  public int Age { get; set; }
+  public int IdAddress { get; set; }
+  public int IdDepartment { get; set; }
+
+  public virtual Address Address { get; set; }
+  public virtual Department Department { get; set; }
+}	
+```
 
 Create a new repository for **User** class. It will give you all the options to read and write to the users table that you have configured on your DbContext.
 ```C#
