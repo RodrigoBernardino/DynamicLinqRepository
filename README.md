@@ -24,6 +24,25 @@ public class EntityRepository<TEntity> : EntityRepository<TEntity, YourDbContext
         { }
     }
 ```
+	
+Create a new interface that will be used as your query results counter. This will be used in the pagination service.
+```C#
+public interface IEntityCounter<TEntity> : IEntityCounter<TEntity, YourDbContext>
+  where TEntity : class, IIdentifiableEntity, new()
+{ }
+```
+	
+Create a new class that most inherit from EntityCounter<TEntity, YourDbContext> and the interface that you have just created.
+```C#
+public class EntityCounter<TEntity> : EntityCounter<TEntity, RepositoryContext>, IEntityCounter<TEntity>
+  where TEntity : class, IIdentifiableEntity, new()
+{
+  public EntityCounter(bool lazyLoadingEnabled, bool proxyCreationEnabled)
+    : base(lazyLoadingEnabled, proxyCreationEnabled)
+  { }
+}
+```
+	
 All entity class most inherit from IIdentifiableEntity interface.
 ```C#
 public class User : IIdentifiableEntity
@@ -39,9 +58,10 @@ public class User : IIdentifiableEntity
 }	
 ```
 
-Create a new repository for **User** class. It will give you all the options to read and write to the User's table that you have configured on your DbContext.
+Create a new repository and counter for **User** class. It will give you all the options to read and write to the User's table that you have configured on your DbContext.
 ```C#
 var repository = new EntityRepository<User>(false, false)
+var counter = new EntityCounter<User>(false, false);
 ```
 
 You can enable lazy loading and proxy creation passing the boolean options in the repository constructor.
@@ -56,7 +76,7 @@ var clauses = new List<string>{ "Name.Contains(\"John\")", "Age > 20" };
 var users = repository.FindAll(clauses);
 ```
 
-You can paginate and sort your query results by the QueryLimits class.
+You can paginate and sort your query results by the QueryLimits class. Use the counter to get the query result's total number of entities and use the QueryLimits class to fetch the current page's data.
 ```C#
 var queryLimits = new QueryLimits
 {
@@ -66,8 +86,15 @@ var queryLimits = new QueryLimits
   Orientation = "ASC" //the sort orientation (can be ASC or DESC)
 };
 
+var wrappedUsersCount = counter.Count(clauses);
+if (wrappedUsersCount.Any())
+{
+  var usersCount = wrappedUsersCount.Single();
+}
 var users = repository.FindAll(queryLimits, clauses);
 ```
+
+The returned count value is encapsulated in a **Maybe** class to avoid null reference errors.
 
 You can fetch entity's nested entity properties.
 ```C#
