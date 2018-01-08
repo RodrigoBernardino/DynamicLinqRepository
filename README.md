@@ -70,7 +70,7 @@ You can enable lazy loading and proxy creation passing the boolean options in th
 
 Fetch all the data that matches the parameters of filtering, pagination and sorting. 
 
-You can filter the data passing a string list that contains the dynamic linq clauses for that query.
+You can filter the data passing a string list with the query Dynamic Linq clauses.
 ```C#
 var clauses = new List<string>{ "Name.Contains(\"John\")", "Age > 20" };
 var users = repository.FindAll(clauses);
