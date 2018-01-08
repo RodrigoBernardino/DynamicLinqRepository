@@ -113,6 +113,7 @@ repository.UpdateRange(newUsers);
 This project was implemented on top of these dependencies:
 
 https://github.com/aspnet/EntityFramework6/wiki
+
 https://github.com/kahanu/System.Linq.Dynamic
 
 Many thanks!
