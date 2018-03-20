@@ -1,6 +1,6 @@
 # DynamicLinqRepository
 
-Repository project that use Entity Framework (>=6.2.0) and System.Linq.Dynamic (>=1.0.7) to provide useful methods for read and write entities with filtering, pagination and sorting.
+Repository project that uses Entity Framework (>=6.2.0) and System.Linq.Dynamic (>=1.0.7) to provide useful methods to read and write entities. These methods can be called with functionalities like pagination, filtering and sorting.
 
 ## Instalation
 Get it on nuget: https://www.nuget.org/packages/DynamicLinqRepository/
@@ -8,7 +8,7 @@ Get it on nuget: https://www.nuget.org/packages/DynamicLinqRepository/
 	PM> Install-Package DynamicLinqRepository
 
 ## How to use
-Create a new interface that will configure your database repository. This interface must inherit from IEntityRepository<TEntity, TContext> interface, that depends of your Entity Framework DbContext. You can add any new methods here.
+Create a new interface in order to configure your database repository. This interface must inherit from IEntityRepository<TEntity, TContext> interface, this interface depends on your Entity Framework DbContext. You can add any new methods here.
 ```C#
 public interface IEntityRepository<TEntity> : IEntityRepository<TEntity, YourDbContext>
         where TEntity : class, IIdentifiableEntity, new()
@@ -25,14 +25,14 @@ public class EntityRepository<TEntity> : EntityRepository<TEntity, YourDbContext
     }
 ```
 	
-Create a new interface that will be used as your query results counter. This will be used in the pagination service.
+Create a new interface that will be used as your query results counter. This will later be used in the pagination service.
 ```C#
 public interface IEntityCounter<TEntity> : IEntityCounter<TEntity, YourDbContext>
   where TEntity : class, IIdentifiableEntity, new()
 { }
 ```
 	
-Create a new class that must inherit from EntityCounter<TEntity, YourDbContext> and also from the interface that you have just created.
+Create a new class that must inherit from EntityCounter<TEntity, YourDbContext> and also from the interface that you have created.
 ```C#
 public class EntityCounter<TEntity> : EntityCounter<TEntity, RepositoryContext>, IEntityCounter<TEntity>
   where TEntity : class, IIdentifiableEntity, new()
@@ -70,13 +70,13 @@ You can enable lazy loading and proxy creation passing the boolean options in th
 
 Fetch all the data that matches the parameters of filtering, pagination and sorting. 
 
-You can filter the data passing a string list with the query Dynamic Linq clauses.
+You can filter the data by passing a string list with the query Dynamic Linq clauses.
 ```C#
 var clauses = new List<string>{ "Name.Contains(\"John\")", "Age > 20" };
 var users = repository.FindAll(clauses);
 ```
 
-You can paginate and sort your query results by the QueryLimits class. Use the counter to get the query result's total number of entities and use the QueryLimits class to fetch the current page's data.
+The QueryLimits class defines the limits that are used in pagination and sorting. Use the counter to get the query result's total number of entities and use the QueryLimits class to fetch the current page's data.
 ```C#
 var queryLimits = new QueryLimits
 {
@@ -117,13 +117,13 @@ if(wrappedNewUser.Any())
 }
 ```
 
-You can remove an entity passing the id or object.
+You can remove an entity by passing the id or object.
 ```C#
 var wrappedRemovedUser = repository.Remove(1);
 var wrappedRemovedUser = repository.Remove(user);
 ```
 
-You can remove a range of entities passing the objects or passing the clauses.
+You can remove a range of entities by passing the objects or by passing the clauses.
 ```C#
 var users = repository.FindAll(clauses);
 repository.RemoveRange(users);
